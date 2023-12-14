@@ -1,27 +1,20 @@
-# PruebaTecnica
+# Prueba Técnica - Sintad
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.7.
+Sistema realizado en Angular CLI version 16.2.7
 
-## Development server
+## Pasos previos
+- Realizar en `npm install` para la instalación de las librerías necesarias.
+- Se necesita el sistema [Back-End](https://github.com/Enzoest26/prueba-tecnica-backend-sintad) levantado para el uso correcto del Front-End.
+- Inicializar con el comando de `ng serve` para el despliegue, opcional agregar el agumento `-o` para abrirlo en una pestaña automaticamente.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Sistema
+Para el logueao al sistema usar el usuario de `ADMIN` y contraseña `ADMIN_ADMIN`. El sistema se inicia con la siguiente ruta: `http://localhost:4200/`
 
-## Code scaffolding
+## Caracteristicas
+Se uso los siguientes modulos para el desarrollo del Front
+- Interceptadores : Utilizado para manejar las peticiones por HTTP, en este caso se agrego el token en los request como Headers y el manejo de errores por parte del servidor.
+- Guards: Utilizado para la proteción de rutas, en este caso se uso para restringir el acceso a los mantenimientos sin el tener un token.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Librerías
+Para el desarrollo se uso las siguientes librerías:
+- Boostrap
