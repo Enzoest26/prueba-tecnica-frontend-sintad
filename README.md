@@ -1,4 +1,4 @@
-# Prueba Técnica - Sintad
+# Prueba Técnica FrontEnd - Sintad
 
 Sistema realizado en Angular CLI version 16.2.7
 
