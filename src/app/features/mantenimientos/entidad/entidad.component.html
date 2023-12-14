@@ -1,0 +1,132 @@
+<div>
+    <h1 class="text-center">Mantenimiento de Entidad</h1>
+    <div>
+        <div class="cont-btn-registrar">
+            <button class="btn btn-success" (click)="abrirRegistrar()">Nuevo</button>
+        </div>
+    </div>
+</div>
+<div class="container-tabla">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo Documento</th>
+                <th>N° Documento</th>
+                <th>Razón Social</th>
+                <th>Nombre Comercial</th>
+                <th>Tipo Contribuyente</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let entidad of dataEntidades">
+                <th>{{entidad.id}}</th>
+                <td>{{entidad.objTipoDocumento.descripcion}}</td>
+                <td>{{entidad.nroDocumento}}</td>
+                <td>{{entidad.razonSocial}}</td>
+                <td>{{entidad.nombreComercial}}</td>
+                <td>{{entidad.objTipoContribuyente?.nombre}}</td>
+                <td>{{entidad.direccion}}</td>
+                <td>{{entidad.telefono}}</td>
+                <td>{{entidad.estado == 1 ? "Activo" : "Desactivado"}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="abrirEditar(entidad.id)">Editar</button>
+                    <button class="btn btn-danger" (click)="abrirEliminar(entidad.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #myModal>
+        <div>
+            <div class="modal-header">
+                <h4 class="modal-title">{{indAccion == 0 ? "Registrar Entidad" : "Actualizar Entidad"}}</h4>
+                <button type="button" class="close" (click)="cerrarModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form [formGroup]="entidadForm">
+                    <div class="form-group row" *ngIf="indAccion == 1">
+                        <label class="col-sm-3 col-form-label">ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly class="form-control" formControlName="id">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-3 col-form-label">Tipo Documento</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" formControlName="idTipoDocumento">
+                                <option *ngFor="let tipoDocumento of dataTiposDocumentos" [value]="tipoDocumento.id">{{tipoDocumento.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">N° Documento</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="nroDocumento">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Razón Social</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="razonSocial">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" >Nombre Comercial</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="nombreComercial">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tipo Contribuyente</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" formControlName="idTipoContribuyente">
+                                <option *ngFor="let tipoContribuyente of dataTiposContribuyentes" [value]="tipoContribuyente.id">{{tipoContribuyente.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Dirección</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="direccion">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Telefono</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="telefono">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Estado</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" formControlName="estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Desactivado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="indAccion == 0" (click)="accionRegistrar()">Registrar</button>
+                <button type="button" class="btn btn-primary" *ngIf="indAccion == 1" (click)="accionActualizar()">Actualizar</button>
+            </div>
+        </div>
+</ng-template>
+
+<ng-template #eliminarModal>
+    <div class="modal-body">
+        <h5>¿Esta seguro de eliminar la Entidad con ID: {{idEliminar}}?</h5>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="accionEliminar()">Eliminar</button>
+    </div>
+</ng-template>

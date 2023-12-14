@@ -1,0 +1,96 @@
+<div>
+    <h1 class="text-center">Mantenimiento de Tipo Documento</h1>
+    <div>
+        <div class="cont-btn-registrar">
+            <button class="btn btn-success" (click)="abrirRegistrar()">Nuevo</button>
+        </div>
+    </div>
+</div>
+<div class="container-tabla">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tipoDocumento of dataTiposDocumentos">
+                <th>{{tipoDocumento.id}}</th>
+                <td>{{tipoDocumento.codigo}}</td>
+                <td>{{tipoDocumento.nombre}}</td>
+                <td>{{tipoDocumento.descripcion}}</td>
+                <td>{{tipoDocumento.estado == 1 ? "Activo" : "Desactivado"}}</td>
+                <td>
+                    <button class="btn btn-warning" (click)="abrirEditar(tipoDocumento.id)">Editar</button>
+                    <button class="btn btn-danger" (click)="abrirEliminar(tipoDocumento.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #generalModal>
+        <div>
+            <div class="modal-header">
+                <h4 class="modal-title">{{indAccion == 0 ? "Registrar Tipo Contribuyente" : "Actualizar Tipo Contribuyente"}}</h4>
+                <button type="button" class="close" (click)="cerrarModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form [formGroup]="tipoDocumentoForm">
+                    <div class="form-group row" *ngIf="indAccion == 1">
+                        <label class="col-sm-3 col-form-label">ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly class="form-control" formControlName="id">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Codigo</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="codigo">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Nombre</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="nombre">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Descripción</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="descripcion">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Estado</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" formControlName="estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Desactivado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="indAccion == 0" (click)="accionRegistrar()">Registrar</button>
+                <button type="button" class="btn btn-primary" *ngIf="indAccion == 1" (click)="accionActualizar()">Actualizar</button>
+            </div>
+        </div>
+</ng-template>
+
+<ng-template #eliminarModal>
+    <div class="modal-body">
+        <h5>¿Esta seguro de eliminar el Tipo Documento con ID: {{idEliminar}}?</h5>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="accionEliminar()">Eliminar</button>
+    </div>
+</ng-template>
